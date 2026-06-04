@@ -1,12 +1,4 @@
-"""
-config.py — Device Detection & Hyperparameters for Flow Matching
-================================================================
 
-Tự động phát hiện Apple MPS (Metal Performance Shaders) trên M-series chip,
-CUDA trên GPU NVIDIA, hoặc fallback về CPU.
-
-Tất cả hyperparameters được quản lý qua dataclass để dễ thay đổi và serialize.
-"""
 
 from __future__ import annotations
 
@@ -15,17 +7,8 @@ from dataclasses import dataclass, field
 from typing import List, Tuple
 
 
-# ─────────────────────────────────────────────────────────────────────────────
-# Device Detection
-# ─────────────────────────────────────────────────────────────────────────────
 
 def get_device() -> torch.device:
-    """
-    Ưu tiên:  MPS (Apple Silicon)  →  CUDA  →  CPU
-
-    Trên MacBook Air M4, MPS backend cho phép PyTorch offload tính toán
-    sang Apple GPU, nhanh hơn CPU ~3-5x cho tensor operations.
-    """
     if torch.backends.mps.is_available() and torch.backends.mps.is_built():
         return torch.device("mps")
     elif torch.cuda.is_available():
