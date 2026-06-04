@@ -1,13 +1,3 @@
-"""
-data.py — 2D Toy Datasets for Flow Matching
-============================================
-
-Các dataset 2D dùng để test và visualize Flow Matching.
-Mỗi dataset sinh ra point cloud với các cấu trúc hình học khác nhau,
-từ đơn giản (Gaussian) đến phức tạp (spirals, checkerboard).
-
-Tất cả dữ liệu được normalize về [-1, 1]² cho training ổn định.
-"""
 
 from __future__ import annotations
 
@@ -16,11 +6,6 @@ import torch
 import numpy as np
 from torch.utils.data import DataLoader, TensorDataset
 from typing import Tuple
-
-
-# ─────────────────────────────────────────────────────────────────────────────
-# Dataset Generators
-# ─────────────────────────────────────────────────────────────────────────────
 
 def make_moons(
     n_samples: int = 10000,
@@ -270,10 +255,6 @@ def make_swissroll(
     perm = torch.randperm(n_samples)
     return data[perm]
 
-
-# ─────────────────────────────────────────────────────────────────────────────
-# Dataset Registry & DataLoader
-# ─────────────────────────────────────────────────────────────────────────────
 
 DATASETS = {
     "moons": make_moons,
